@@ -1,0 +1,4 @@
+go-cqhttp/
+__pycache__/
+.idea/
+venv/
