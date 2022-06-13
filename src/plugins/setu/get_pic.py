@@ -12,7 +12,7 @@ async def get_pic(r18=0,keyword=''):
     }
     print(param)
     try:
-        response = requests.get(url,params=param)
+        response = requests.get(url,params=param,timeout=5)
         pic_url = response.json()['data'][0]['urls']['original']
         # base64_pic = await down_pic(pic_url)
         # pic = "[CQ:image,file=base64://" + base64_pic + "]"
@@ -21,7 +21,7 @@ async def get_pic(r18=0,keyword=''):
         return f'根据条件没找到图'
     except Exception as e:
         print(e)
-        return f'请求太快了hxd'
+        return f'快被玩坏了[CQ:face,id=111]'
 
 
 async def down_pic(url):
