@@ -12,7 +12,7 @@ async def get_pic(r18=0,keyword=''):
     }
     print(param)
     try:
-        response = requests.get(url,params=param,timeout=5)
+        response = requests.get(url,params=param,timeout=20)
         pic_url = response.json()['data'][0]['urls']['original']
         # base64_pic = await down_pic(pic_url)
         # pic = "[CQ:image,file=base64://" + base64_pic + "]"
