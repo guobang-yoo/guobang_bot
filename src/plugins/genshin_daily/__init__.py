@@ -1,4 +1,4 @@
-from nonebot import on_command,on_keyword,rule
+from nonebot import on_command,on_endswith,rule
 from nonebot.adapters.onebot.v11 import Message,MessageEvent
 from configs.path_config import GENSHIN_IMAGE
 from nonebot.plugin import require
@@ -10,7 +10,7 @@ IMAGE_PATH = GENSHIN_IMAGE + "/material"
 auth = require("white_list")
 wuneigui=rule.Rule(auth['auth']['wuneigui'])
 
-wqtf = on_keyword(['天赋','武器'])
+wqtf = on_endswith(['天赋','武器'])
 material = on_command("今日素材", aliases={"今日材料", "今天素材", "今天材料"},rule=wuneigui)
 
 @wqtf.handle()

@@ -1,23 +1,17 @@
-from nonebot import on_command,rule
+from nonebot import on_command,on_keyword,rule
 from nonebot.adapters.onebot.v11 import Event,Bot,Message
 from .get_pic import get_pic
 from nonebot.plugin import require
 
 auth = require("white_list")
 wuneigui=rule.Rule(auth['auth']['wuneigui'])
-setu = on_command("setu",rule=wuneigui,aliases={'无内鬼', '涩图', '色图'})
+setu = on_command("setu",rule=wuneigui)
+kw = on_keyword(set(['无内鬼','色图','涩图']),rule==wuneigui)
 
-
+kw.handle()
 @setu.handle()
 async def _(bot:Bot,event:Event):
     message = str(event.get_message()).split(' ')
-    # if 'setu' in message:
-    #     message.remove('setu')
-    # r18=0
-    # if 'r18' in message:
-    #     message.remove('r18')
-    #     r18=1
-    # keyword=message.pop()if len(message)>0 else ''
     r18,keyword=verify_message(message)
     pic_url = await get_pic(r18,keyword)
     try:
