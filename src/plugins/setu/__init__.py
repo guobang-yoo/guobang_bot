@@ -6,9 +6,9 @@ from nonebot.plugin import require
 auth = require("white_list")
 wuneigui=rule.Rule(auth['auth']['wuneigui'])
 setu = on_command("setu",rule=wuneigui)
-kw = on_keyword(set(['无内鬼','色图','涩图']),rule==wuneigui)
+kw = on_keyword(set(['无内鬼','色图','涩图']),rule=wuneigui)
 
-kw.handle()
+@kw.handle()
 @setu.handle()
 async def _(bot:Bot,event:Event):
     message = str(event.get_message()).split(' ')
@@ -25,13 +25,15 @@ async def _(bot:Bot,event:Event):
         await setu.send(message=Message('可能是图太涩了，没发出去，自己去看'))
         await setu.send(message=pic_url)
 
-def verify_message(message=[]):
+def verify_message(message=''):
     aliases={'无内鬼', '涩图', '色图'}
     r18=0
     for al in aliases:
-        if al in message:
-            return 0,''
-    message.remove('setu')
+        for m in message:
+            if al in m:
+                return 0, ''
+    if 'setu' in message:
+        message.remove('setu')
     if 'r18' in message:
         message.remove('r18')
         r18=1
