@@ -14,8 +14,7 @@ async def get_pic(r18=0,keyword=''):
     try:
         response = requests.get(url,params=param,timeout=20)
         pic_url = response.json()['data'][0]['urls']['original']
-        # base64_pic = await down_pic(pic_url)
-        # pic = "[CQ:image,file=base64://" + base64_pic + "]"
+
         return pic_url
     except IndexError as e:
         return f'根据条件没找到图'
@@ -24,7 +23,9 @@ async def get_pic(r18=0,keyword=''):
         return f'快被玩坏了[CQ:face,id=111]'
 
 
-async def down_pic(url):
+async def down_base64pic(url):
+    # base64_pic = await down_pic(pic_url)
+    # pic_base64 = "base64://" + base64_pic
     response = requests.get(url)
     if response:
         ba = str(base64.b64encode(response.content))
